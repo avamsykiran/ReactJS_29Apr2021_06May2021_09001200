@@ -6,12 +6,16 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            title:"My First Angular App"
+        };
     }
 
     render() {
         return (
             <React.Fragment>
-                <Header />
+                <Header title={this.state.title} />
                 <Counter />
             </React.Fragment>
         );
