@@ -199,7 +199,6 @@ ReactJS
 
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
-
               Functional Components
               ----------------------------------------------
 
@@ -239,12 +238,86 @@ ReactJS
                 by parent component in resposne to any event.
 
 
-
             Forms in ReactJS
             --------------------------------------------------------------
 
-                Controled Forms
-                UnControled Forms
+                Forms In Controlled Components
 
+                        The foem elements will directly update the changes made into the 
+                        state using onChange event and setState method.
+
+                Forms in UnControlled Components
+
+                        1. create temparary data holders called references.
+
+                                this.ref1 = createRef();
+
+                        2. line these referencew with the respective input elements,
+
+                                <input defaultValue="0" type="text" ref={this.ref1} />
+
+                        3. After the form is submitted, we can collect values from all references, and
+                            then proces that.
+
+
+            Routing
+            ---------------------------------------------------------------------
+
+                Navigating in a web applcation is handled by routing, or routing config.
+
+                react-router
+                react-router-dom
+
+                        BrowserRouter           is a contaienr of reouting config.
+                        Route                   configs which component msut appear
+                                                for which url. (maps a url with a component)
+                        Switch                  ensure that only the first matching url
+                                                related component appers.
+
+
+                                                home            HomeComponent
+                                                emp             EmpComponent
+                                                empPlus         AddEmpComponent
+
+                                                http://localhost:8989/home          HomeComponent
+                                                http://localhost:8989/emp           EmpComponent, AddEmpComponent
+
+                                                to correct tha above glitch, we use Switch
+
+                        Redirect                is used to navigate programatically.
+
+                        Link                    is used as analternate to <a></a>
+
+                        
+            React Component LifeCycle
+            -----------------------------------------------
+
+                constructor() 
+                     |
+                    render()
+                        |
+                      componentDidMount()
+                                 |
+                                {the compoenet state might change} ----------|     
+                                    |                                        |
+                                    render ()                                |
+                                        |                                    |   
+                                        componentDidUpdate()                 |
+                                            |                                |
+                                            | (event handing happens ) ------|
+                                                    |
+                                                    | (component is asked to unmount )
+                                                    componentWillUnmount()
+
+                While at any stage in this component,
+                if the react renderer ort laoder encounter an error:
+                    componentDidCatch() 
+
+        Form Validations
+        ---------------------------------------------------------------
+
+            
+
+                 
 
                 
