@@ -12,7 +12,8 @@ class TaskForm extends Component {
             validErr: { id: null, title: null, status: null },
             isEditing: false,
             isTaskSaved: false,
-            isFormValid:false
+            isFormValid: false,
+            err: null
         };
     }
 
@@ -21,20 +22,36 @@ class TaskForm extends Component {
 
         if (taskId) {
             let isEditing = true;
-            let task = getTaskById(taskId);
-            this.setState({ task, isEditing });
+            getTaskById(taskId).then(
+                resp => this.setState({ task: resp.data, isEditing }),
+                err => {
+                    console.log(err);
+                    this.setState({ err: "Unable to load the record to be edited" });
+                }
+            );
         }
     }
 
     formSubmitted = (event) => {
         event.preventDefault(); //will prevent the formfrom auto-relaoding ..etc
 
+        let p = null;
         if (this.state.isEditing)
-            updateTask(this.state.task);
+            p = updateTask(this.state.task);
         else
-            addTask(this.state.task);
+            p = addTask(this.state.task);
 
-        this.setState({ isTaskSaved: true });
+        p.then(
+            resp => {
+                if (resp.status == 201 || resp.status==200) {
+                    this.setState({ isTaskSaved: true });
+                }
+            },
+            err => {
+                console.log(err);
+                this.setState({ err: "Unable to save the record " });
+            }
+        );
     }
 
     onChangeHandler = event => {
@@ -44,31 +61,31 @@ class TaskForm extends Component {
 
         let { name, value } = event.target;
         let err = null;
-        let isFormValid=true;
+        let isFormValid = true;
 
         switch (name) {
             case 'id':
                 value = parseInt(value);
                 if (value <= 0) {
                     err = "Id is mandate and can be either a positive non-zero number";
-                    isFormValid=false;
+                    isFormValid = false;
                 }
                 break;
             case 'title':
                 if (value == null || value.length < 10) {
                     err = "Title is a mandate field and it msut be atleast 10 chars in length";
-                    isFormValid=false;
+                    isFormValid = false;
                 }
                 break;
             case 'status':
                 if (value == null || value.length == 0) {
                     err = "Please select a status";
-                    isFormValid=false;
+                    isFormValid = false;
                 }
                 break;
         }
 
-        this.setState({ isFormValid,task: { ...this.state.task, [name]: value }, validErr: { ...this.state.validErr, [name]: err } });
+        this.setState({ isFormValid, task: { ...this.state.task, [name]: value }, validErr: { ...this.state.validErr, [name]: err } });
     };
 
     render() {
@@ -77,7 +94,15 @@ class TaskForm extends Component {
 
         if (this.state.isTaskSaved) {
             finalDom = <Redirect to="/tasksList" />
-        } else {
+        } else if(this.state.err){
+            finalDom = (
+                <section className="container-fluid p-4">
+                    <div className="alert alert-danger">
+                        <strong>{this.state.err}</strong>
+                    </div>
+                </section>
+            );
+        }else {
 
             let { task, validErr } = this.state;
 

@@ -316,7 +316,90 @@ ReactJS
         Form Validations
         ---------------------------------------------------------------
 
+                onChagne we can collect all the validations,
+                and display them on the form.
+
+        Working With REST API
+        ----------------------------------------------------------------
+
+            Instead of rest apis from java/.net/ anythign else, we will use
+            a fake rest api using 'json-server'
+
+                npm install --save json-server
+
+                we will add the below commadn into the scripts section of package.json 
+                
+                    json-server --watch datafile.json --port portNumber
+
             
+            We will 'axios' , a tool to communciate with rest api, to
+            talk to our fake rest api.
+
+                npm install --save axios
+
+
+                axios
+                        .get(url)               : Promise
+                        .put(url,requestBody)   : Promise
+                        .post(url,requestBody)  : Promise
+                        .delete(url)            : Promise
+
+            
+            React LifeCycle Hooks
+            -------------------------------------------------------
+
+                Functional Components hasve no access tot eh 
+                component lifecycle methods:
+
+                            like setState / componentDidMount / componentDidUpdate ..etc
+
+                Lately in react, the cocept of lifecycle hooks
+                are introduced to enable access to life cycle method in a functional component.
+
+                Rules
+                    1. The hooks must lie as the first or top statements in the 
+                        functional component body.
+                    2. Hooks must be used only in functional components.
+
+                Hooks
+                    1. useState
+                                    is a repalcemtn for setState.
+                                    it return an array of two elements, first being the monitored variable,
+                                    and secodn being a function to update state.
+                                    it accepts the initial value.
+
+                                    let [x,setX] = useState(0);
+                                    
+                    2. useEffect 
+                                    is equivalent to componentDidMount, componentDidUpdate
+
+                                    useEffect(()=>{
+                                        //this piece of code get executed
+                                        //every tiem the component is loaded            componentDidMount
+                                        //every tiem the component render is complete   componentDidUpdate
+                                    });
+
+                                    useEffect(()=>{
+                                        //this piece of code get executed
+                                        //every tiem the component is loaded            componentDidMount
+                                        //every tiem the component render is complete and if
+                                        //some chagne happens in the given dependencies
+                                    },[dependencies]);
+
+                                    if dependencies array is empty, then the useEffect works like
+                                    componentDidMount only.
+
+
+
+
+
+
+
+
+            
+
+
+
 
                  
 
