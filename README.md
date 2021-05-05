@@ -54,12 +54,21 @@ ReactJS
 
 
         ReactJS Components
-        ---------------------------------------------------------------------------------
+        -------------------------------------------------------------------------------
 
             Class Components
             Functional Components
             Pure Funtional Components
+
+                a functional component that does not use any
+                react library reosurces or effect any other component.
+
             High Order Components
+
+                is a function
+                        that accepts a component as param
+                        and returns that component with some
+                        modifications.
 
         Class Components
         ---------------------------------------------------------------------------------
@@ -348,7 +357,7 @@ ReactJS
             React LifeCycle Hooks
             -------------------------------------------------------
 
-                Functional Components hasve no access tot eh 
+                Functional Components hasve no access to the 
                 component lifecycle methods:
 
                             like setState / componentDidMount / componentDidUpdate ..etc
@@ -391,7 +400,130 @@ ReactJS
 
 
 
+    State Mangement Tools
+    ---------------------------------------------------------------------------
 
+        "Single Source Of Truth"????
+
+                    state -----connected---- screen
+
+                    whatever we on the memory,
+                    the same msut appear on the screen.
+
+                    to achive this, rendering is to happen
+                    immidieatly if the state is modified.
+
+                    this render auto-trigger after state is modified,
+                    can happen only if we a single source of truth.
+
+        the state can be managed
+            by each component (locally)
+            or by a tool once per application (globally).
+
+        It is very important that if one component
+        makes changes to the state, all other components are
+        automatically informed of the change.
+
+        Redux   -  State Management Tool
+        ------------------------------------------------------
+
+            npm install --save redux
+
+
+                store               a store is a global keeper of state.
+                                    it supplies the state whenever and whewrever requested.
+                                    it receives the state for modification from 'reducer'
+
+                reducer             is a pure function
+                                        params:     olderState, action
+                                        return:     modifeidState
+
+                action              an action is an object with two properties:
+                                        type            indicate what action must happne
+                                        payload         any data needed to accomplish the action
+
+                                        {
+                                            type: 'ADD',
+                                            payload: {id:1,title:'Do a task',status:'Completed'}
+                                        }
+
+                                        {
+                                            type: 'DELETE',
+                                            payload: 101
+                                        }
+
+                    createStore         is a built-in fucntion that 
+                                        accepts a reducer and returns store object
+                                        assosiated with it.
+
+                                        const myreducer = (oldStore,action) =>{
+                                            ..................
+                                            return modifedStore;
+                                        };
+
+                                        const mystore = createStore(myreducer);
+                
+                
+                npm install --save react-redux
+                
+                    Provider            is a inbuilt linking compoenet 
+                                        this links the store with the main component of our react applciation.
+
+                                        ReactDOM.render(
+                                            <React.StrictMode>
+                                                <Provider store={mystore}>
+                                                    <App />
+                                                </Provider>
+                                            </React.StrictMode>,
+                                            document.getElementById('root')
+                                            );
+
+                    connect             is a inbuilt function 
+                                                accepts two functions   mapStateToProps,mapDispatchToProps
+                                                and returns a high order component.
+
+                                        const mapStateToProps = (globalState) => {
+                                            return aJsonObject;
+                                        };
+
+                                        const mapDispatchToProps = (dispatch) => {
+                                            return aJsonObject;
+                                        };
+
+                                        const hoc = connect(mapStateToProps,mapDispatchToProps);
+
+                                        //the hoc can now be used to connect the state with our onw component.
+
+                                        const connectedTaskManager = hoc(TaskManager);
+
+                                        TaskManager can not acces the state or dispatch directly,
+                                        but connectedTaskManger has access to the state and dispatch.
+
+                    dispatch            is a function that carries actions from the component
+                                        to the reducer.
+
+
+                                                            TaskManager (Componet)
+                                                                | connect()() //hoc
+                                                                |
+                 store -->supplies globalState as props--> ConnectedTaskManager       
+                    |                                           |
+                    |                                           | action = {type:'DELETE',payload:101}
+                    |                                           | dispatch(action);
+                    |                                           |
+                    |<-------return the modified state  <------ reducer
+
+
+        Integrate Redux, React with an asynchronous rest api caller like axios
+        --------------------------------------------------------------------------
+
+                Redux Thunk
+                Redux Saga
+
+
+
+
+        
 
 
 
