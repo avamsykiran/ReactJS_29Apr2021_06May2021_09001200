@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { addTask, getTaskById, updateTask } from '../services/taskService';
+import { connect } from 'react-redux';
+import { prepareAddTaskAction,prepareUpdateTaskAction} from '../services/tasksActions';
 
 class TaskForm extends Component {
 
@@ -21,8 +22,8 @@ class TaskForm extends Component {
 
         if (taskId) {
             let isEditing = true;
-            let task = getTaskById(taskId);
-            this.setState({ task, isEditing });
+            let task = this.props.tasks.find(t => t.id==taskId);
+            this.setState({ task:{...task}, isEditing });
         }
     }
 
@@ -30,9 +31,9 @@ class TaskForm extends Component {
         event.preventDefault(); //will prevent the formfrom auto-relaoding ..etc
 
         if (this.state.isEditing)
-            updateTask(this.state.task);
+            this.props.update(this.state.task);
         else
-            addTask(this.state.task);
+            this.props.add(this.state.task);
 
         this.setState({ isTaskSaved: true });
     }
@@ -145,4 +146,15 @@ class TaskForm extends Component {
     }
 }
 
-export default TaskForm;
+const mapStateToProps = (state) => ({
+    tasks:state.tasks
+});
+
+const mapDispatchToProps = (dispatch) =>({
+    add: (task) => dispatch(prepareAddTaskAction(task)),
+    update: (task) => dispatch(prepareUpdateTaskAction(task))
+});
+
+const connectToStore = connect(mapStateToProps,mapDispatchToProps);
+
+export default connectToStore(TaskForm);

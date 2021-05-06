@@ -399,7 +399,6 @@ ReactJS
                                     componentDidMount only.
 
 
-
     State Mangement Tools
     ---------------------------------------------------------------------------
 
@@ -431,7 +430,7 @@ ReactJS
 
 
                 store               a store is a global keeper of state.
-                                    it supplies the state whenever and whewrever requested.
+                                    it supplies the state whenever and wherever requested.
                                     it receives the state for modification from 'reducer'
 
                 reducer             is a pure function
@@ -512,7 +511,6 @@ ReactJS
                     |                                           | dispatch(action);
                     |                                           |
                     |<-------return the modified state  <------ reducer
-
 
         Integrate Redux, React with an asynchronous rest api caller like axios
         --------------------------------------------------------------------------
