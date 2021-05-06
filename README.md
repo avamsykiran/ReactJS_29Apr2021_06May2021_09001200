@@ -512,6 +512,27 @@ ReactJS
                     |                                           |
                     |<-------return the modified state  <------ reducer
 
+
+        Assignment
+        -----------------------------------------------------------------------
+            InventoryManagement
+
+                item: {
+                    id:1,
+                    title:"A4 sheets bundle",
+                    price:456.0,
+                    stock:45
+                }
+
+                React App to perfom CRUD operatiosn 
+                on this entity using Redux
+                fro state mangeemnt.
+
+                C   Create
+                R   Retrive
+                U   Update
+                D   Delete
+
         Integrate Redux, React with an asynchronous rest api caller like axios
         --------------------------------------------------------------------------
 
