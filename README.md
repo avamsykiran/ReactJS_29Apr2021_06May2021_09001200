@@ -537,6 +537,34 @@ ReactJS
         --------------------------------------------------------------------------
 
                 Redux Thunk
+                --------------------------------------------------------------
+                        npm install --save redux-thunk
+                
+                        thunk       a function that returns another function.
+                
+                                                            Componet
+                                                                | connect()() //hoc
+                                                                |
+                 store -->supplies globalState as props--> ConnectedComponent     ---------------------->  
+                    |                                           |                                       |
+                    |                                           | action = {type:'DELETE',payload:101}  |
+                    |                                           | dispatch(action);                     |
+                    |                                           |                                       |
+                    |<-------return the modified state  <------ reducer                                 |
+                    |                                               |   <------------dispatch(thunk)----
+                    |                                               |
+                    |                                               | execute the thunk which returns 
+                    |                                               | an action function,
+                    |                                               | that action function will
+                    |                                               | perform  the rest api calkl (async)
+                    | <---------------------thunk action started-----
+                    | <---------------------resposnen is successful-| if the call is successfull
+                    | <---------------------resposnen is errornomous| if the call is errornomous
+
+                
+                
+                
+                
                 Redux Saga
 
 
