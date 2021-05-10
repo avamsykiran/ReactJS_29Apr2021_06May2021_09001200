@@ -559,20 +559,70 @@ ReactJS
                     |                                               | perform  the rest api calkl (async)
                     | <---------------------thunk action started-----
                     | <---------------------resposnen is successful-| if the call is successfull
-                    | <---------------------resposnen is errornomous| if the call is errornomous
-
-                
-                
-                
+                    | <---------------------resposnen is errornomous| if the call is errornomous                       
                 
                 Redux Saga
+                --------------------------------------------------------------
+                        npm install --save redux-saga
 
+                        Saga is a javascript generator function
+                        that yeidls promise objects.
 
+                        A generator function is a function
+                        that can return more than one value
+                        at different stages of execution.
 
+                        function* func(param){
+                            ..................
+                            yeild val1;
+                            ...............
+                            ...............
+                            yeild val2;
+                            ...................
+                            ......................
+                            return val;
+                        }
+            
+            React - Testing
+            ------------------------------------------------------------
 
-        
+                JEST        is a javascript testing library.
 
+                Test Suites
+                ------------------------
 
+                        describe("test suite description",() => {
+                            //testcases
+                        });
+
+                Test Case
+                --------------------------
+
+                        it("test case description",()=>{
+                            //test cae code goes....
+                        });
+
+                Setup and Teat Down
+                ---------------------------
+
+                        before(()=>{
+                            //setup code goes and executes
+                            //before executing each test case
+                        });
+
+                        after(()=>{
+                            //teat down code foes here and 
+                            //is executed after the execution of each test case
+                        });
+
+                Matchers
+                -----------------------------
+
+                    expect(actualOutputExpression).toBe(expectedValue);
+                    expect(actualOutputExpression).toBeStrictlyEquals(expectedValue);
+                    expect(actualOutputExpression).toBe(true);
+                    expect(actualOutputExpression).toBeTruthy();
+                                    ..................................etc.,
 
 
             
